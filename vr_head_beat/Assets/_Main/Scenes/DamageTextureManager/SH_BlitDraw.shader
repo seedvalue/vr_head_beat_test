@@ -42,7 +42,8 @@ Shader "Hidden/BlitDraw"
                 half4 brush = _BrushColor * mask * _BrushStrength;
 
                 // Смешиваем
-                col = lerp(col, brush, brush.a);
+                //col = lerp(col, brush, brush.a);
+                col = saturate(col + brush); //добавляем
 
                 return col;
             }
