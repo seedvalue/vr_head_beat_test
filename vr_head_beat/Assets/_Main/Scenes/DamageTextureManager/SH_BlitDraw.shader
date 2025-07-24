@@ -4,7 +4,7 @@ Shader "Hidden/BlitDraw"
     {
         _MainTex    ("Main Texture", 2D) = "white" {}
         _BrushTex   ("Brush Texture",2D) = "white" {}
-        _BrushColor ("Brush Color",  Color) = (1,1,1,1)
+        _BrushColor ("Brush Color",  Color) = (1,0,0,1)
         _BrushUV    ("Brush UV",     Vector) = (0.5,0.5,0,0)
         _BrushSize  ("Brush Size",   Float) = 0.1
         _BrushStrength("Brush Strength", Range(0,1)) = 1.0   // <<< новый параметр
