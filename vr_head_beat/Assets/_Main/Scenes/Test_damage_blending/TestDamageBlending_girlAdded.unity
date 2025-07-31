@@ -2773,7 +2773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLayerName: DamagedNPC
   damageMask: {fileID: 8400000, guid: 7284384e6ef98e647a1c5b34a009bc7e, type: 2}
-  brushSize: 0.2
+  brushSize: 0.4
   blitMaterial: {fileID: 2100000, guid: c1e2b32198dbf1f489220ab103437d7a, type: 2}
   painterMaterial: {fileID: 2100000, guid: e6cb5c2137084e24e98a64cbe19475e6, type: 2}
   brushTexture2D: {fileID: 2800000, guid: f291c3456c80a0740b741422e65d3492, type: 3}

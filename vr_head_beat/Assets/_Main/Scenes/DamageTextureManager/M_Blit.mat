@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BrushTex:
-        m_Texture: {fileID: 2800000, guid: f7d8a8250ef9e6a46bb1a94f42be1f8a, type: 3}
+        m_Texture: {fileID: 2800000, guid: f291c3456c80a0740b741422e65d3492, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -102,8 +102,8 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BrushSize: 0.1
-    - _BrushStrength: 0.034
+    - _BrushSize: 0.4
+    - _BrushStrength: 0.05
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -133,7 +133,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BrushColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BrushUV: {r: 0.46224302, g: 0.46908042, b: 0, a: 0}
+    - _BrushUV: {r: 0.30125248, g: 0.7146801, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
