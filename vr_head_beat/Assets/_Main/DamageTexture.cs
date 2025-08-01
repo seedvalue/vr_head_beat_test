@@ -105,13 +105,15 @@ public class DamageTexture : MonoBehaviour
             Debug.LogWarning("Cannot draw damage: damageMask or blitMaterial is null.");
             return;
         }
-        DrawToMaskBlitMaterial(uvCoordinate);
+        
+        var calculatedForce = force * brushStrength;
+        DrawToMaskBlitMaterial(uvCoordinate, calculatedForce);
     }
     
     /// <summary>
     /// Выполняет отрисовку кисти в RenderTexture с помощью Graphics.Blit.
     /// </summary>
-    private void DrawToMaskBlitMaterial(Vector2 uv)
+    private void DrawToMaskBlitMaterial(Vector2 uv, float calculatedForce)
     {
         Debug.Log($"DrawToMask : {uv}");
         
@@ -119,7 +121,7 @@ public class DamageTexture : MonoBehaviour
         blitMaterial.SetTexture("_BrushTex", brushTexture2D);
         blitMaterial.SetVector("_BrushUV", uv);
         blitMaterial.SetFloat("_BrushSize", brushSize);
-        blitMaterial.SetFloat("_BrushStrength", brushStrength);
+        blitMaterial.SetFloat("_BrushStrength", calculatedForce);
 
         // Создаем временную RenderTexture для промежуточного результата
         var tmp = RenderTexture.GetTemporary(damageMask.width, damageMask.height, 0, damageMask.format);
@@ -144,7 +146,6 @@ public class DamageTexture : MonoBehaviour
     {
         // 1. Создаем RenderTexture
         CreateDamageMask();
-        
         // 2. Инициализируем её (очищаем и назначаем материалу)
         InitDamageMask();
     }

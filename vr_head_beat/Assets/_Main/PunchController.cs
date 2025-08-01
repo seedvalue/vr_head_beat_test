@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+// Убедитесь, что у вас есть ссылка на UnityEngine.UI, если Slider находится на другом объекте
+// using UnityEngine.UI; 
 
 public class PunchController : MonoBehaviour
 {
@@ -11,9 +13,17 @@ public class PunchController : MonoBehaviour
     [Tooltip("Камера, из которой будет пускаться луч")]
     public Camera playerCamera;
 
-    
-    [SerializeField] float force = 1.0f;
-    
+    [Header("Force Settings")]
+    [Tooltip("Текущая сила удара (0-1)")]
+    [Range(0f, 1f)]
+    public float normalizedForce = 0.5f; // Значение по умолчанию 0.5 (50%)
+    [Tooltip("Шаг изменения силы за одно движение колеса мыши")]
+    public float forceStep = 0.05f; // Меньший шаг для более плавного изменения
+
+    [Header("UI")]
+    [Tooltip("Ссылка на UI Slider для отображения силы")]
+    public UnityEngine.UI.Slider forceSliderUI; // Ссылка на слайдер в инспекторе
+
     private int targetLayerMask;
     
     private void Start()
@@ -42,6 +52,9 @@ public class PunchController : MonoBehaviour
             enabled = false;
             return;
         }
+
+        // Инициализируем UI
+        UpdateForceUI();
     }
 
     private void Update()
@@ -50,6 +63,48 @@ public class PunchController : MonoBehaviour
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             TryPunch();
+        }
+
+        // Проверяем движение колеса мыши для изменения силы
+        if (Mouse.current != null)
+        {
+            float scroll = Mouse.current.scroll.ReadValue().y;
+            if (scroll != 0)
+            {
+                ChangeForce(scroll);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Изменяет нормализованную силу удара в зависимости от движения колеса мыши.
+    /// </summary>
+    /// <param name="scrollDelta">Значение прокрутки колеса мыши (положительное - вверх, отрицательное - вниз).</param>
+    private void ChangeForce(float scrollDelta)
+    {
+        // Определяем направление изменения силы
+        float direction = Mathf.Sign(scrollDelta);
+        // Изменяем нормализованную силу
+        normalizedForce += direction * forceStep;
+        // Ограничиваем силу в диапазоне 0-1
+        normalizedForce = Mathf.Clamp01(normalizedForce);
+        
+        // Выводим новое значение силы в консоль
+        Debug.Log($"Normalized Punch Force changed to: {normalizedForce:F2}");
+
+        // Обновляем UI напрямую
+        UpdateForceUI();
+    }
+
+    /// <summary>
+    /// Обновляет значение на UI слайдере, если он назначен.
+    /// </summary>
+    private void UpdateForceUI()
+    {
+        // Если слайдер назначен в инспекторе, обновляем его значение напрямую
+        if (forceSliderUI != null)
+        {
+            forceSliderUI.value = normalizedForce;
         }
     }
 
@@ -68,17 +123,20 @@ public class PunchController : MonoBehaviour
         {
             // Получаем UV-координаты из информации о пересечении
             var hitUV = hit.textureCoord;
-            // Выводим координаты UV в консоль
-            Debug.Log($"Попадание! UV координаты: {hitUV}");
+            // Выводим координаты UV и силу в консоль
+            Debug.Log($"Попадание! UV координаты: {hitUV}, Нормализованная сила удара: {normalizedForce:F2}");
             Debug.Log($"Объект: {hit.collider.name}, Точка попадания: {hit.point}");
+            
             var transRoot = hit.transform.root;
-            if (transRoot.TryGetComponent<DamagedNPC>(out var component))
+            // Предполагая, что компонент называется DamageTexture
+            if (transRoot.TryGetComponent<DamagedNPC>(out var component)) 
             {
-                component.ApplyDamage(hitUV, force);
+                // Передаем рассчитанные UV и текущую нормализованную силу
+                component.ApplyDamage(hitUV, normalizedForce);
             }
             else
             {
-                Debug.LogError($"PunchController : TryPunch : trans.TryGetComponent<DamagedNPC> NULL : {transRoot.gameObject.name}");
+                Debug.LogError($"PunchController : TryPunch : DamageTexture component not found on {transRoot.gameObject.name}");
             }
         }
         else

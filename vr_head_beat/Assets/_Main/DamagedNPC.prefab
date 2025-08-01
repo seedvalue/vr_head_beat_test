@@ -66,7 +66,7 @@ MonoBehaviour:
   renderTextureFormat: 0
   brushSize: 0.5
   brushTexture2D: {fileID: 2800000, guid: f291c3456c80a0740b741422e65d3492, type: 3}
-  brushStrength: 0.038
+  brushStrength: 0.06
   rawImageTestPainter: {fileID: 0}
 --- !u!1001 &4140928325701402045
 PrefabInstance:
