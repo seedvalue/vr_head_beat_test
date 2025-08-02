@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamagedNPC (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6397029231826769860, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8164460152373715386, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.116
@@ -486,7 +490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLayerName: DamagedNPC
   playerCamera: {fileID: 580332823}
-  force: 1
+  normalizedForce: 0.5
+  forceStep: 0.05
   forceSliderUI: {fileID: 414240823}
 --- !u!4 &233543714
 Transform:
@@ -1807,6 +1812,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamagedNPC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6397029231826769860, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8164460152373715386, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.466
@@ -2728,13 +2737,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 57684889164488793, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 970312028740372304, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075197168416399772, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829752043785540855, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238070090862382628, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3062966683906576676, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126023386868433326, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147459049747232888, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3562407440793783764, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
       propertyPath: rawImageTestPainter
       value: 
       objectReference: {fileID: 1861314894}
+    - target: {fileID: 4057425009514206139, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599566992543224726, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846438288991091552, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962424792399023713, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6397029231826769860, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
       propertyPath: m_Name
       value: DamagedNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044430282199005347, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8164460152373715386, guid: 8f3230fc363ddec4eb476e9dfc4751a7, type: 3}
       propertyPath: m_LocalPosition.x

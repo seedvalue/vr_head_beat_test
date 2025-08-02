@@ -25,11 +25,17 @@ public class PunchController : MonoBehaviour
     public UnityEngine.UI.Slider forceSliderUI; // Ссылка на слайдер в инспекторе
 
     private int targetLayerMask;
+    private int targetLayerMaskTEST;
+    
     
     private void Start()
     {
         // Получаем индекс слоя и создаем маску для рейкаста
-        int targetLayer = LayerMask.NameToLayer(targetLayerName);
+        var targetLayer = LayerMask.NameToLayer(targetLayerName);
+        
+        // Получаем индекс слоя и создаем маску для рейкаста
+        var targetLayerTEST = LayerMask.NameToLayer("TestLayer");
+        
         if (targetLayer == -1)
         {
             Debug.LogError($"Слой с именем \"{targetLayerName}\" не найден! Проверьте настройки слоев.");
@@ -39,6 +45,10 @@ public class PunchController : MonoBehaviour
         
         // Создаем маску слоя (1 << targetLayer означает "только этот слой")
         targetLayerMask = 1 << targetLayer;
+        targetLayerMaskTEST = 1 << targetLayerTEST;
+        
+        
+        
         
         // Если у вас нет ссылки на камеру, пробуем получить основную камеру
         if (playerCamera == null)
@@ -118,6 +128,32 @@ public class PunchController : MonoBehaviour
         // Создаем луч из камеры через позицию курсора
         var ray = playerCamera.ScreenPointToRay(mousePosition);
         
+        
+        
+        /*
+        if (Physics.Raycast(ray, out RaycastHit hit2, Mathf.Infinity, targetLayerMaskTEST))
+        {
+           Debug.LogError("TEST RAY!");
+            // --- Расчет направления удара ---
+            // Направление удара - это направление луча от камеры
+            var hitDirection = ray.direction;
+            var transRoot = hit2.transform.root;
+            // Предполагая, что компонент называется DamageTexture
+            if (transRoot.TryGetComponent<DamagedNPC>(out var component)) 
+            {
+                // Передаем только силу дял теста
+                component.ApplyDamage(hit2.point, hitDirection, new Vector2(0,0), normalizedForce);
+            }
+            else
+            {
+                Debug.LogError($"PunchController : TryPunch : DamageTexture component not found on {transRoot.gameObject.name}");
+            }
+        }
+        */
+        
+        
+        
+        
         // Выполняем рейкаст только по объектам на слое DamagedNPC
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, targetLayerMask))
         {
@@ -127,12 +163,16 @@ public class PunchController : MonoBehaviour
             Debug.Log($"Попадание! UV координаты: {hitUV}, Нормализованная сила удара: {normalizedForce:F2}");
             Debug.Log($"Объект: {hit.collider.name}, Точка попадания: {hit.point}");
             
+            // --- Расчет направления удара ---
+            // Направление удара - это направление луча от камеры
+            var hitDirection = ray.direction;
+            
             var transRoot = hit.transform.root;
             // Предполагая, что компонент называется DamageTexture
             if (transRoot.TryGetComponent<DamagedNPC>(out var component)) 
             {
                 // Передаем рассчитанные UV и текущую нормализованную силу
-                component.ApplyDamage(hitUV, normalizedForce);
+                component.ApplyDamage(hit.point, hitDirection, hitUV, normalizedForce);
             }
             else
             {
