@@ -7,14 +7,20 @@ public class DamagedNPC : MonoBehaviour
 {
     [SerializeField] private DamageTexture damageTexture;
     [SerializeField] private DamageRagdoll damageRagdoll;
+    [SerializeField] private DamageSound damageSound;
     
     public void ApplyDamage(Vector3 hitPoint, Vector3 hitDirection, Vector2 uvCoordinate, float force = 1.0f)
     {
-        Debug.Log($"DamagedNPC: ApplyDamage : uvCoordinate: {uvCoordinate}, force: {force}");
-        damageTexture.DrawDamage(uvCoordinate, force);
-        damageRagdoll.ApplyDamage(hitPoint, hitDirection, uvCoordinate, force);
+        Debug.Log($"DamagedNPC: ApplyDamage : uvCoordinate: {uvCoordinate}, force: {force}"); 
         
+        if(damageTexture)damageTexture.DrawDamage(uvCoordinate, force);
+        else Debug.LogError("damageTexture NULL");
         
+        if(damageRagdoll)damageRagdoll.ApplyDamage(hitPoint, hitDirection, uvCoordinate, force);
+        else Debug.LogError("damageRagdoll NULL");
+
+        if(damageSound)damageSound.ApplyDamage(force);
+        else Debug.LogError("damageSound NULL");
         
         
         
